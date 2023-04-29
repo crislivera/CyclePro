@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BATTER</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Poiret+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
+            integrity="sha256-nZaxPHA2uAaquixjSDX19TmIlbRNCOrf5HO1oHl5p70=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Screens</h1>
+        <div id="stage1-frames">
+            <div id="stance-frame"><h2>Stance</h2></div>
+            <div id="movement-frame"><h2>Movement</h2></div>
+            <div id="execution-frame"><h2>Execution</h2></div>
+            <button>Start Analysing</button>
+<!--            <img style="max-width: 100%;height: auto;" src="/Users/lakjeewawijebandara/Documents/Lakiya/mineminemine/FinalYearProject/BatterPy/stage1-output-frames/frame0.jpg" width="500" height="300">-->
+        </div>
+        <div id="analysed-frames">
+            <h1>Analysed Frames of the stroke</h1>
+            <div id="stance-frame-ana"><h2>Analysed Stance</h2></div>
+            <div id="movement-frame-ana"><h2>Analysed Movement</h2></div>
+            <div id="execution-frame-ana"><h2>Analysed Execution</h2></div>
+        </div>
+        <div id="summary-stroke">
+            <h1>Summary of the stroke</h1>
+                            <canvas id="myChart" class="main-summary-canvas" width="400" height="400"></canvas>
+                            <div>
+                                <button type="button" class="btn next-right-btn">More Analytics&nbsp;<i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+        </div>
+    </div>
+<script>
+    let stage1Path = localStorage.getItem('stage1Path');
+    console.log("stage1Path",stage1Path,$('#stage1-frames'));
+
+    //stance
+    $('#stance-frame').append(`<img src="${stage1Path}/frame0.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+    $('#stance-frame').append(`<img src="${stage1Path}/frame1.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+    $('#stance-frame').append(`<img src="${stage1Path}/frame4.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+
+//    movement
+    $('#movement-frame').append(`<img src="${stage1Path}/frame20.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+    $('#movement-frame').append(`<img src="${stage1Path}/frame26.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+    $('#movement-frame').append(`<img src="${stage1Path}/frame27.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+
+//    execution
+    $('#execution-frame').append(`<img src="${stage1Path}/frame35.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+    $('#execution-frame').append(`<img src="${stage1Path}/frame41.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+    $('#execution-frame').append(`<img src="${stage1Path}/frame42.jpg" style="max-width: 100%;height: auto;" width="400" height="300">`);
+
+
+    //analysed stance
+    $('#stance-frame-ana').append(`<img src="/Users/lakjeewawijebandara/Documents/Lakiya/mineminemine/FinalYearProject/BatterPy/stage2-output-frames/keypoints-opacity/frame0.jpg.jpg" style="max-width: 100%;height: auto;" width="600" height="500">`);
+
+    $("#videoInput").change(function () {
+        console.log("here comes the boom");
+        readURL(this);
+    });
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['Stance', 'Leg Movement', 'Execution'],
+            datasets: [{
+                label: 'Stroke Summary',
+                data: [80, 90, 20],
+                backgroundColor: 'rgba(255, 99, 71, 0.4)',
+                borderColor: 'rgba(255, 99, 71, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scale: {
+                gridLines: {
+                    color: 'Gray'
+                },
+                angleLines: {
+                    display: true,
+                    color: 'Gray'
+                },
+                ticks: {
+                    fontColor: "rgba(100, 40, 71)",
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                },
+                pointLabels: {
+                    // callback: function(value, index, values) {
+                    //     return '$' + value;
+                    // }
+                    fontColor: "rgba(255, 99, 71)",
+                    fontSize: 13
+                }
+            },
+            legend: {
+                display: true,
+                labels: {
+                    fontColor: 'rgb(255, 255, 255)',
+                    fontSize: 20
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

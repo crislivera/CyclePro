@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Poiret+One&display=swap" rel="stylesheet">
+    <style>
+        h1{
+            font-family: 'Baloo Chettan 2', cursive;
+            color: #1967D2;
+            font-size: 90px;
+
+        }
+        h2{
+            font-family: 'Poiret One', cursive;
+            color: #1967D2;
+            font-size: 76px;
+
+        }
+        .center-div{
+            text-align: center;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 50%;
+            border-radius: 3px;
+        }
+
+        #pot{bottom:53%;
+            position:absolute;
+            -webkit-animation:linear infinite alternate;
+            -webkit-animation-name: run;
+            -webkit-animation-duration: 4s;
+        }
+        @-webkit-keyframes run {
+            0% { left: 0;}
+            50%{ left : 100%;}
+            100%{ left: 0;}
+        }
+        .image {
+            /*position: absolute;*/
+            /*top: 24%;*/
+            /*left: 107%;*/
+            /*width: 203px;*/
+            /*height: 203px;*/
+            margin:-60px 0 0 -60px;
+            transform: rotate(0deg);
+            -webkit-animation:spin 4s linear infinite;
+            -moz-animation:spin 4s linear infinite;
+            animation:spin 4s linear infinite;
+        }
+        @-moz-keyframes spin { 100% { -moz-transform: rotate(0deg); } }
+        @-webkit-keyframes spin { 100% { -webkit-transform: rotate(0deg); } }
+        @keyframes spin { 100% { -webkit-transform: rotate(0deg); transform:rotate(0deg); } }
+    </style>
+</head>
+<body style="background-color: #E8F0FE;">
+    <div class="center-div">
+        <div id = "pot">
+            <img class="image" src = "./assets/images/cricket.png"width = "200px" height ="200px">
+        </div>
+<!--        <img class="image" src="./assets/images/cricket-bat1.png" alt="" width="120" height="120">-->
+        <h1>CyclePro</h1>
+        <h2 id="loaderText"></h2>
+    </div>
+    <script>
+        var perc = 0;
+        loaderIncrease(0);
+        function loaderIncrease(sec) {
+
+            // $("#loaderText").innerHTML
+            var interval = 350;//milliseconds
+            setTimeout(function(){
+                console.log("perce",perc,"Sec",sec);
+                sec = sec+25;
+                perc = perc + 10;
+                if (perc <=100)
+                    $("#loaderText").html(`${perc}%`);
+                if(perc <= 100)
+                    loaderIncrease(sec);//call self with new value
+                if (perc >100)
+
+                    window.open("index.html","_self");
+            },interval)
+        }
+    </script>
+</body>
+
+</html>
